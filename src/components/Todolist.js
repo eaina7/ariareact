@@ -23,9 +23,9 @@ function Todolist() {
           setToDoList(newToDoList);
         
         };
-      let completeHandler = () => {
+      let completeHandler = (id) => {
           setToDoList(todolist.map(item =>{
-            if (item.id === todolist.id) {
+            if (item.id === id) {
               return {
                 ...item,done:!item.done,
               };
@@ -41,19 +41,18 @@ function Todolist() {
            <h1>-------------------------FIRST PART-------------------------</h1> 
            <ul>
       {todolist.map((item) => (
-        <ul key={item.id}> {item.text} {item.done}
+        <div className={item.done? "completed" : ""} key={item.id}> {item.text} {item.done}
         
   
           <button type="button" onClick={() => deleteHandler(item.id)}>
             Delete
           </button>
-          <li className = {`todo-item ${item.done ? "completed" : ""}`} >
-      <button onClick= {completeHandler} className= "complete-btn">Complete 
+            <button onClick= {() => completeHandler(item.id)} className= "complete-btn">Complete 
+          
           
 
       </button>
-      </li>
-          </ul>
+          </div>
       ))}
       </ul>      
       
